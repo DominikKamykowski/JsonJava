@@ -8,7 +8,6 @@ import java.util.Vector;
 public class MainForm extends JDialog {
     private JPanel contentPane;
     private JButton buttonADD;
-    private JTable tblUsers; // TODO implement table model view
     private JButton refreshButton;
     private JTable userTabel;
     private JButton removeButton;
@@ -49,7 +48,8 @@ public class MainForm extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println(tblUsers.getSelectedRow());
+
+                System.out.println(userTabel.getSelectedRow());
 
             }
         });
