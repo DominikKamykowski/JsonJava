@@ -51,4 +51,5 @@ public class UserTableModel extends AbstractTableModel {
             return Object.class;
         }
     }
+
 }

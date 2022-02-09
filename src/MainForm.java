@@ -47,9 +47,18 @@ public class MainForm extends JDialog {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+//                System.out.println(userTabel.getSelectedRow());
+                JsonPersonRepository repo = new JsonPersonRepository();
+                Collection<User> users  = repo.GetAll();
 
+//                UserTableModel model = new UserTableModel(users);
+//                userTabel.setModel(model);
+//                userTabel.setAutoCreateRowSorter(true);
 
                 System.out.println(userTabel.getSelectedRow());
+                int id = userTabel.getSelectedRow();
+
+                repo.Read(userTabel.getSelectedRow());
 
             }
         });

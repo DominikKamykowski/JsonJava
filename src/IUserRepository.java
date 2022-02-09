@@ -10,7 +10,7 @@ public interface IUserRepository {
 
     void Update(User personToUpdate);
 
-    void Remove(int id);
+    void Read(int id);
 
     int CountPersonOverYrs(int yearsFromCount);
 

@@ -1,10 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -60,9 +57,28 @@ class JsonPersonRepository implements IUserRepository {
     }
 
     @Override
-    public void Remove(int id) {
+    public void Read(int id) {
         // TODO implement remove function
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Gson gson = new Gson();
+        try {
+            String json = new String(Files.readAllBytes(Paths.get("users.json")));
+            Type userType = new TypeToken<Collection<User>>() {}.getType();
+            Collection<User> usrList = gson.fromJson(json,userType);
+
+            Iterator itr = usrList.iterator();
+
+            while(itr.hasNext()) {
+                if(((User) itr.next()).getId() == (id-1)){
+                    User lastElement = (User) itr.next();
+                    System.out.println(lastElement.getName()+" "+lastElement.getNationality());
+                    break;
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -79,7 +95,7 @@ class JsonPersonRepository implements IUserRepository {
         while(itr.hasNext()) {
             lastElement = (User) itr.next();
         }
-        System.out.println();
+
         return lastElement.getId()+1;
     }
 
@@ -94,7 +110,7 @@ class JsonPersonRepository implements IUserRepository {
             pw.close();
 
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
 
     }
